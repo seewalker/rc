@@ -1,0 +1,3 @@
+let fltDiv a b = (fromIntegral a) / (fromIntegral b)
+
+:set editor vim
