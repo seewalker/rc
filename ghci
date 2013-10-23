@@ -1,3 +1,7 @@
-let fltDiv a b = (fromIntegral a) / (fromIntegral b)
+let fltDiv x y = (fromIntegral x) / (fromIntegral y)
 
+let factorial n = foldl (*) 1 [2..n]
+let fibs = 0 : 1 : [i + j | (i,j) <- zip fibs (tail fibs)]
+
+:l ~/src/haskell/fun.hs
 :set editor vim

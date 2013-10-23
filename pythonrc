@@ -1,0 +1,31 @@
+#speed of light in meters per second
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+#constants in SI units
+vc = 299792458.0   
+h  = 6.62606957E-34
+hbar = 1.0545727E-34
+me = 9.10938291E-31
+mp = 1.672621777E-27    #mass of proton
+mn = 1.674927351E-27
+qe = 1.60217657E-19
+G = 6.68259E-11
+ep0 = 8.854187817E-12
+kC = 1.0 / (4 * math.pi * ep0)
+
+def gamma(v):
+    return (1.0 / math.sqrt(1.0 - v ** 2))
+def eVToJ(energy):
+    return energy * 1.602176565E-19
+def JToeV(energy):
+    return energy / 1.602176565E-19
+def inchTocm(length):
+    return length * 2.54
+def degrees(angle):
+    return (180.0 / math.pi) * angle
+def radians(angle):
+    return (math.pi / 180.0) * angle
+def q():
+    quit()

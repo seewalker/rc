@@ -8,6 +8,9 @@ export PAGER="/bin/sh -c \"unset PAGER; col -b -x | \
    vim -R -c 'set ft=man nomod nolist' -c 'map q : q<CR>' \
    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+export PYTHONSTARTUP=/home/alex/.pythonrc
+export EXT_LLVM_DIR=/home/alex/Downloads/llvm-3.2.src/build
+
 #the following allows shell buffer editting in vi style. (In case you haven't
 #noticed, I like vim).
 set -o vi
@@ -19,6 +22,8 @@ set -o vi
 alias please=sudo
 alias fucking=sudo
 
+alias py=python
+
 shopt -s cdspell
                                     #HISTORY
 #If I put these two in scripts, I get history expansion (not of the parent 
@@ -28,8 +33,8 @@ set -o histexpand
 # append to the history file, don't overwrite it
 shopt -s histappend
 #Makes the size of the history unlimited
-HISTFILESIZE=
-HISTSIZE=
+export HISTFILESIZE=
+export HISTSIZE=
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -49,6 +54,14 @@ function cdl {
     ls
 }
 
+function screen? {
+  if [ $TERM == "screen" ]
+  then
+      echo "yes"
+  else
+      echo "no"
+  fi
+}
 #Often, in the course programming, I will go through a 'text-edit' -> 'compile'
 # -> 'run' -> 'text-edit' ... cycle. Rather than hit the up arrow key thrice
 #before every command, one can simply use this 'cyc' command. Since the use case
@@ -61,16 +74,18 @@ function cyc {
     eval $( fc -nl -$CYCLE -$CYCLE )
 }
 
-# The following function compares the relative frequency with which
-# two commands are used. It does not currently work because there is
-# a conflict between awk and bash in the meaning of $2. I need both bash's
-# idea, the command line argument, and awk's idea, the second field.
-
-# function freqCmp {
-#     fstCnt=`history | awk "{if ($1 == \$2) print $2}" | wc -l
-#     sndCnt=`history | awk "{if ($2 == \$2) print $2}" | wc -l
-#     echo $fstCnt $sndCnt | awk '{print $1 }'
-# }
+#Computes the relative frequency of the two commands given as command line 
+#arguments
+function freqCmp {
+    #in the output of the 'history' command, a bash command comes in the 
+    #second column, so I need to compare the function arguments to $2. There
+    #is a namespace issue where both bash and awk have their own ideas of what
+    #$2 means, so the variable $awk2 is a workaround to do things bash's way.
+    awk2='$2'
+    fstCnt=`history | awk "{if (\"$1\" == $awk2) print }" | wc -l`
+    sndCnt=`history | awk "{if (\"$2\" == $awk2) print }" | wc -l`
+    echo | awk "{print $fstCnt / $sndCnt}"
+}
 
 #Syntax for iterating over command line arguments
  #for i in "$@"
