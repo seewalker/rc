@@ -1,0 +1,10 @@
+xterm*termName: xterm-256color
+xterm*faceSize: 14
+xterm*saveLines: 8192
+xTerm*ScrollBar: true
+xTerm*rightScrollBar: true
+xTerm*locale: true
+xTerm*background:cyan1
+xterm*scrollTtyOutput: false
+xscreensaver.timeout: 10
+xscreensaver.cycle: 5

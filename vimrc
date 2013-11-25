@@ -30,8 +30,8 @@ set hidden       "Don't ask to write buffer before i switch to a new buffer.
 set autowrite
 set laststatus=2 "laststatus is overriden by the statusline plugin.
 set undolevels=1001 "the default is 1000. Can't be too cautious.
-set statusline=  "the presence of my statusline shows that the plugin is
-                 "read later than this nullification.
+set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m 
+                
 set autochdir "makes the cwd of a buffer the directory of its file (this may
               "have side-effects with plugins
 set novisualbell
