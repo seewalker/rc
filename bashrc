@@ -9,7 +9,8 @@ export PAGER="/bin/sh -c \"unset PAGER; col -b -x | \
    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 export PYTHONSTARTUP=/home/alex/.pythonrc
-export EXT_LLVM_DIR=/home/alex/Downloads/llvm-3.2.src/build
+export EXT_LLVM_DIR=/usr/local/src/llvm-3.2.src/build
+export EDITOR=/usr/local/bin/vim
 
 #the following allows shell buffer editting in vi style. (In case you haven't
 #noticed, I like vim).
@@ -33,8 +34,13 @@ set -o histexpand
 # append to the history file, don't overwrite it
 shopt -s histappend
 #Makes the size of the history unlimited
+export HISTTIMEFORMAT='%F %T'
 export HISTFILESIZE=
 export HISTSIZE=
+
+#bash executes PROMPT_COMMAND after every command. Using this
+#one makes my $HISTFILE continuously update.
+PROMPT_COMMAND='history -a'
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.

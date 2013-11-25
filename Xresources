@@ -1,10 +1,36 @@
-xterm*termName: xterm-256color
-xterm*faceSize: 14
-xterm*saveLines: 8192
-xTerm*ScrollBar: true
-xTerm*rightScrollBar: true
-xTerm*locale: true
-xTerm*background:cyan1
-xterm*scrollTtyOutput: false
+!XTerm
+XTerm*termName: xterm-256color
+
+!color definitions
+
+#define chartreuse #dfff00
+#define olive #808000
+
+#define pastelRed #f7977a
+#define pastelOrange #fdc68a
+#define pastelYellow #fff794
+#define pastelPeaGreen #c4df9b
+#define pastelGreen #82ca9d
+#define pastelBlue #8493ca
+#define pastelViolet #a187be
+
+
+!URxvt
+urxvt.saveLines: 8192
+urxvt.ScrollBar: true
+urxvt.toolBar: true
+urxvt.locale: true
+urxvt.font:xft:DejaVu Sans Mono:size=10
+urxvt.background:pastelYellow
+urxvt.scrollTtyOutput: false
+!extensions
+urxvt.perl-ext-common: default,matcher,tabbed,fullscreen
+!clickable URLS
+urxvt.url-launcher: /usr/bin/firefox
+urxvt.matcher.button: 2
+!Fullscreen mode
+urxvt.keysym.F11: perl:fullscreen:switch
+
+!screensaver
 xscreensaver.timeout: 10
 xscreensaver.cycle: 5
