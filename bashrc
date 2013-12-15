@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+#My .bash_profile is a symbolic link to this file. I have no
+#need to make a distinction between login shells and non-login shells.
+
 #Resetting vim to be the pager
 #The PAGER variable is the program with which man is displayed.
 export PAGER="/bin/sh -c \"unset PAGER; col -b -x | \
@@ -9,12 +12,14 @@ export PAGER="/bin/sh -c \"unset PAGER; col -b -x | \
    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 export PYTHONSTARTUP=/home/alex/.pythonrc
-export EXT_LLVM_DIR=/usr/local/src/llvm-3.2.src/build
-export EDITOR=/usr/local/bin/vim
-
+export IPYTHONDIR=/home/alex/.ipython/
+export EXT_LLVM_DIR=/home/alex/Downloads/llvm-3.2.src/build
+export EDITOR="vim"
+export GREP_OPTIONS="--color=auto"
+export NTPLOG="/home/alex/log/ntp"
 #the following allows shell buffer editting in vi style. (In case you haven't
 #noticed, I like vim).
-set -o vi
+#set -o vi
 
 #While referring to my bash history I often try to understand what I did and
 #and why I did it. These aliases to 'sudo' convey not only what I was doing,
@@ -25,30 +30,32 @@ alias fucking=sudo
 
 alias py=python
 
+#correct obvious mispellings in directory paths.
 shopt -s cdspell
-                                    #HISTORY
-#If I put these two in scripts, I get history expansion (not of the parent 
-#shell's history, but of the script's history)
-set -o history 
-set -o histexpand 
-# append to the history file, don't overwrite it
+
+#history customization
+#when HISTSIZE is undefined, history is infinite.
+#I should not use the -o history nor -o histextend options
+#because they clutter the history with startup commands
 shopt -s histappend
-#Makes the size of the history unlimited
-export HISTTIMEFORMAT='%F %T'
-export HISTFILESIZE=
-export HISTSIZE=
+HISTSIZE=
+HISTFILESIZE= 
 
-#bash executes PROMPT_COMMAND after every command. Using this
-#one makes my $HISTFILE continuously update.
-PROMPT_COMMAND='history -a'
+#color definitions
+red="\033[31m"
+green="\033[32m"
+yellow="\033[33m"
+blue="\033[34m"
+reset="\033[m"
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoreboth
-
-                              #CONVENIENCE MACROS
+if [[ $UID -eq 0 ]]; then
+    modalColor=31
+else
+    modalColor=32
+fi
+#prompt
+PS1="\e[0;${modalColor}m\!|\u@\h:\w \e[m"
+#CONVENIENCE MACROS
 alias kj="kill -9 `jobs -p`"
 
 function work {
@@ -58,26 +65,6 @@ function work {
 function cdl {
     cd $1
     ls
-}
-
-function screen? {
-  if [ $TERM == "screen" ]
-  then
-      echo "yes"
-  else
-      echo "no"
-  fi
-}
-#Often, in the course programming, I will go through a 'text-edit' -> 'compile'
-# -> 'run' -> 'text-edit' ... cycle. Rather than hit the up arrow key thrice
-#before every command, one can simply use this 'cyc' command. Since the use case
-#above is common, 3 is the default cycle length, but that can be overriden by 
-#defining an environment variable named CYCLE to the desired integer value.
-function cyc { 
-    if [ -z $CYCLE ]; then 
-       CYCLE=3
-    fi
-    eval $( fc -nl -$CYCLE -$CYCLE )
 }
 
 #Computes the relative frequency of the two commands given as command line 
@@ -143,6 +130,9 @@ function rmnot {
    #items that occur each time are to be deleted
 }
 
+if [ `uname -s` = "Darwin" ]; then
+    OSXey
+fi
                       #Beyond this point is Debian Default
 
 # If not running interactively, don't do anything
@@ -182,32 +172,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
 fi
 
 # Alias definitions.

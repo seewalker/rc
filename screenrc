@@ -1,8 +1,17 @@
-bind j focus down
-bind k focus up
-bind h focus left
-bind l focus right
 startup_message off
-vbell off
 
-caption always "%{d}%{.bY}Window:(%n,%t) %{.bk} SessionName:%S %{.br}load:%l"
+bind j focus down
+bind l focus right
+bind h focus left
+bind k focus up
+bind t focus top
+bind b focus bottom
+
+caption always
+#these do not display
+hardstatus on
+hardstatus alwayslastline 
+hardstatus string "screen"
+caption always "%{dc}%t(%n)"
+term screen
+

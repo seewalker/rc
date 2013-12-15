@@ -1,0 +1,19 @@
+#Functionality here can be tested both in bash and in ipython
+
+set editing-mode vi
+#tab completion displays extra info.
+set visible-stats
+$if mode=vi
+set keymap vi-command
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+#"\ek": history-search-backward
+#"\ej": history-search-forward
+
+set keymap vi-insert
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+$endif
+#Two possible tab-completion variants are listing all possible combinations(
+#bash default) and cycling through possibilities(vim default).

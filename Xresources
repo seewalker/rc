@@ -1,35 +1,56 @@
-!XTerm
-XTerm*termName: xterm-256color
-
-!color definitions
-
-#define chartreuse #dfff00
-#define olive #808000
-
 #define pastelRed #f7977a
 #define pastelOrange #fdc68a
 #define pastelYellow #fff794
 #define pastelPeaGreen #c4df9b
 #define pastelGreen #82ca9d
+#define pastelCyan #6ecff6
 #define pastelBlue #8493ca
 #define pastelViolet #a187be
+#define pastelMagenta #f49ac2
+#define paleBrown #c7b299
+#define warmBrown #a67c52
+#define chartreuse #dfff11
+#define olive #818111
+#define darkRed #9e1b1f
+#define darkGreen #115826
+#define darkCyan #113663
+#define darkViolet #32114b
+#define eggshell #fafafa
 
+*.geometry: 100x32
+*.saveLines: 8192
+*.ScrollBar: true
+*.scrollTtyOutput: false
+*.toolBar: true
+*.font:xft:DejaVu Sans Mono:size=13
+*.color10:warmBrown
+*.color11:pastelPeaGreen
+!Colors
+*.background:eggshell
+*.foreground:#000000
+*.cursorColor: pastelBlue 
+*.underlineColor:pastelViolet
 
-!URxvt
-urxvt.saveLines: 8192
-urxvt.ScrollBar: true
-urxvt.toolBar: true
-urxvt.locale: true
-urxvt.font:xft:DejaVu Sans Mono:size=10
-urxvt.background:pastelYellow
-urxvt.scrollTtyOutput: false
+!Some extensions are in /usr/lib/urxvt/perl, others are in $HOME/.urxvt/ext/
 !extensions
-urxvt.perl-ext-common: default,matcher,tabbed,fullscreen
+*.perl-lib:/usr/lib/urxvt/perl
+*.perl-ext-common: default,tabbed,fullscreen,keyboard-select,url-select,clipboard
+!tab stuff (not currently showing effect)
+*.tabbed.tab-bg:10
+*.tabbed.tab-fg:11
 !clickable URLS
-urxvt.url-launcher: /usr/bin/firefox
-urxvt.matcher.button: 2
-!Fullscreen mode
-urxvt.keysym.F11: perl:fullscreen:switch
+*.keysym.M-u: perl:url-select:select_next
+*.url-select.button:2
+*.url-select.launcher:/usr/local/firefox/firefox
+*.url-select.underline:true
+!Fullscreen mode (my plugin)
+*.keysym.F11: perl:fullscreen:switch
+*.keysym.M-Escape: perl:keyboard-select:activate
+*.keysym.M-s: perl:keyboard-select:search
+!clipboard
+*.keysym.M-c: perl:clipboard:copy
+*.keysym.M-v: perl:clipboard:paste
+!I could change the 'b' option to 'p' or 's' if I want to use those buffers
 
 !screensaver
 xscreensaver.timeout: 10
