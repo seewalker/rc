@@ -16,19 +16,20 @@
 #define darkCyan #113663
 #define darkViolet #32114b
 #define eggshell #fafafa
+#define darkgray #020202
 
-*.geometry: 100x32
+*.font:xft:DejaVu Sans Mono:size=13
+Xcursor.theme: top_tee
+Xcursor.size: 22
 *.saveLines: 8192
 *.ScrollBar: true
 *.scrollTtyOutput: false
-*.toolBar: true
-*.font:xft:DejaVu Sans Mono:size=13
 *.color10:warmBrown
 *.color11:pastelPeaGreen
 !Colors
 *.background:eggshell
 *.foreground:#000000
-*.cursorColor: pastelBlue 
+*.cursorColor: pastelBlue
 *.underlineColor:pastelViolet
 
 !Some extensions are in /usr/lib/urxvt/perl, others are in $HOME/.urxvt/ext/
@@ -41,7 +42,7 @@
 !clickable URLS
 *.keysym.M-u: perl:url-select:select_next
 *.url-select.button:2
-*.url-select.launcher:/usr/local/firefox/firefox
+*.url-select.launcher:/usr/bin/chromium
 *.url-select.underline:true
 !Fullscreen mode (my plugin)
 *.keysym.F11: perl:fullscreen:switch
@@ -55,3 +56,8 @@
 !screensaver
 xscreensaver.timeout: 10
 xscreensaver.cycle: 5
+xscreensaver.Dialog.background: eggshell
+xscreensaver.Dialog.foreground: darkgray
+xscreensaver.Dialog.topShadowColor: pastelViolet
+xscreensaver.passwd.thermometer.foreground: #ff3333
+xscreensaver.passwd.thermometer.background: #3333ff

@@ -1,4 +1,5 @@
 startup_message off
+vbell off
 
 bind j focus down
 bind l focus right
@@ -7,11 +8,7 @@ bind k focus up
 bind t focus top
 bind b focus bottom
 
-caption always
-#these do not display
-hardstatus on
-hardstatus alwayslastline 
-hardstatus string "screen"
-caption always "%{dc}%t(%n)"
-term screen
+defscrollback 1000 #size of buffer for copy/scrollback mode
 
+backtick 1 0 1 $HOME/.screenBackticks/.myPwd.sh
+caption always "%{kY} wd:%1` %{kY} | %{cY}Window:(%n,%t) %{kY} | %{mY}SessionName:%S %{kY} |"

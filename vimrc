@@ -23,8 +23,9 @@ set hidden       "Don't ask to write buffer before i switch to a new buffer.
 set autowrite
 set laststatus=2 "laststatus is overriden by the statusline plugin.
 set undolevels=1001 "the default is 1000. Can't be too cautious.
-set statusline=  "the presence of my statusline shows that the plugin is
-                 "read later than this nullification.
+"having a statusline plugin overrides this (vimrc executes before pathogen
+"plugins).
+set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m
 set autochdir "makes the cwd of a buffer the directory of its file (this may
               "have side-effects with plugins
 set novisualbell
@@ -186,9 +187,16 @@ highlight alexTrailingWhitespace ctermbg=Blue
 "and less of an assertion.
 highlight alexOverLength ctermbg=Yellow ctermfg=White
 highlight alexMakeTabGroup ctermbg=Red
+
+function HaskoreMode()
+    inoremap note Note(,) n []<ESC>?(<CR>a
+    inoremap pp :+:
+    inoremap pe :=:
+endfunction
+
 augroup HighLighting
     autocmd!
-    autocmd InsertLeave * match alexTrailingWhitespace /\s\+$/
+    autocmd BufWrite * match alexTrailingWhitespace /\s\+$/
     "note : I should generalize this to adjust to columns variable
     if(&virtualedit != "")
         autocmd InsertLeave * match alexOverLength /\%81v.\+/

@@ -17,6 +17,7 @@ export EXT_LLVM_DIR=/home/alex/Downloads/llvm-3.2.src/build
 export EDITOR="vim"
 export GREP_OPTIONS="--color=auto"
 export NTPLOG="/home/alex/log/ntp"
+export BROWSER=/usr/bin/chromium
 #the following allows shell buffer editting in vi style. (In case you haven't
 #noticed, I like vim).
 #set -o vi
@@ -49,12 +50,11 @@ blue="\033[34m"
 reset="\033[m"
 
 if [[ $UID -eq 0 ]]; then
-    modalColor=31
+    PS1="\e[1;31m\!\e[0;m|\e[2;31m\u\e[0;31m\e[0;m@\e[3;31m\h\e[0;m: "
 else
-    modalColor=32
+    PS1="\e[1;33m\!\e[0;m|\e[2;36m\u\e[0;35m\e[0;m@\e[2;32m\h\e[0;m: "
 fi
 #prompt
-PS1="\e[0;${modalColor}m\!|\u@\h:\w \e[m"
 #CONVENIENCE MACROS
 alias kj="kill -9 `jobs -p`"
 
