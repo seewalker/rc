@@ -1,0 +1,20 @@
+#Automatically forwards an X connection so that $DISPLAY is set.
+Host *
+    ForwardX11 yes
+
+# The Host sections are like structs with default parameters
+# The HostName variable provides an alias.
+# The User variable provides a default username (it can be overriden
+#   with a -l option).
+
+Host cluster.earlham.edu
+    User akseewa11
+
+Host proto
+    HostName proto.cs.earlham.edu
+    User akseewa11
+
+Host as0
+    HostName as0
+    User akseewa11
+    ProxyCommand ssh -t -Y akseewa11@cluster.earlham.edu nc %h %p
