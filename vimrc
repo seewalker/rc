@@ -211,6 +211,7 @@ augroup FileTypes
     autocmd BufEnter *.pro set filetype=prolog
     autocmd BufEnter *.b set filetype=brainfuck
     autocmd BufEnter *.b set matchpairs=[:]
+    autocmd BufEnter *httpd*.conf set filetype=apache
     autocmd FileType c ab pr printf
     autocmd FileType c,cpp set cindent
     autocmd FileType c,cpp  ab inc include
