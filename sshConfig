@@ -1,13 +1,17 @@
 #Automatically forwards an X connection so that $DISPLAY is set.
-Host *
-    ForwardX11 yes
 
 # The Host sections are like structs with default parameters
 # The HostName variable provides an alias.
 # The User variable provides a default username (it can be overriden
 #   with a -l option).
 
+LogLevel debug
+
 Host cluster.earlham.edu
+    User akseewa11
+
+Host acl
+    HostName acl2.cs.earlham.edu
     User akseewa11
 
 Host proto
@@ -18,3 +22,11 @@ Host as0
     HostName as0
     User akseewa11
     ProxyCommand ssh -t -Y akseewa11@cluster.earlham.edu nc %h %p
+
+Host raichu
+    User aseewald
+    HostName raichu.soic.indiana.edu
+    # `LocalForward $1 $2 ' makes the service (daemon) running on port $1 on the remote machine
+    # accessible to the local machine at port $2.
+    LocalForward 50030 localhost:50030
+    LocalForward 50060 localhost:50060

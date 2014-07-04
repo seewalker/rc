@@ -11,7 +11,7 @@ ec=$HOME/Documents/EarlhamCollege
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="philips"
+#ZSH_THEME="kolo"
 
 
 # Example aliases
@@ -58,7 +58,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=/sbin:/usr/sbin:/usr/local/bin:${PATH}
+export PATH=/usr/texbin:~/.cabal/bin:/sbin:/usr/sbin:/usr/local/bin:${PATH}
+export PATH=/usr/local/cuda/bin:$PATH
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -85,6 +88,7 @@ function flipPager {
 PS2="|%_> "
 export EDITOR="vim"
 export PAGER=less
+export PERL5LIB=/System/Library/Perl/Extras/5.16/darwin-thread-multi-2level
 #export VIMPAGER="/bin/sh -c "unset PAGER; col -b -x |    vim -R -c 'set ft=man nomod nolist' -c 'map q : q<CR>'    -c 'map <SPACE> <C-D>' -c 'map b <C-U>'    -c 'nmap K :Man <C-R>=expand(\"<cword>\")<CR><CR>' -""
 export LANG="en_Us"
 export KEYTIMEOUT=0.4
@@ -105,6 +109,16 @@ setopt RC_QUOTES #allows single quotes to be nested in strings
 setopt MUltios #implicit 'tee' for multiple `/ ><words>/' expressions.
 setopt VI
 
-bindkey "^[[A" history-beginning-search-backward  #up arrow
-bindkey "^[[B" history-beginning-search-forward   #down arrow
+zmodload zsh/pcre #pcres can go like [[ $x =~ "foo"  ]] in conditionals.
+bindkey "^[[A" history-beginning-search-backward  #up arrow doesn't simply go up by one. it goes up
+                                                    #by one iff text matches.
+bindkey "^[[B" history-beginning-search-forward   #same with down arrow.
+
+de=~/Documents/EarlhamCollege/
+wr=/Library/WebServer/Documents/
+OPENCV_LIBPATH=/usr/local/lib
+OPENCV_INCLUDEPATH=/usr/local/include
+#CUDA_INCLUDEPATH=
+#CUDA_
+perlre=/usr/local/Cellar/perl516/5.16.3/bin/re.pl
 # Search based on what you typed in already

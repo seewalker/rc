@@ -10,7 +10,7 @@ let g:posHoldReg = 'n'
 let g:spacing = 4
 
 syntax enable
-colorscheme default
+colorscheme xoria256
 set nocompatible
 set smartindent
 set smartcase
@@ -25,7 +25,7 @@ set laststatus=2 "laststatus is overriden by the statusline plugin.
 set undolevels=1001 "the default is 1000. Can't be too cautious.
 "having a statusline plugin overrides this (vimrc executes before pathogen
 "plugins).
-set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m
+set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m 
 set autochdir "makes the cwd of a buffer the directory of its file (this may
               "have side-effects with plugins
 set novisualbell
@@ -95,13 +95,11 @@ vnoremap jk <ESC>
 inoremap <c-l> <ESC>ui
 "When making headings, one often wants to center the current line and
 "keep the next line left-justified.
-inoremap cxc <ESC>:center<CR>j:left<CR>i
 inoremap <localleader><BS> <ESC>l:call BsTab()<CR>i
-nnoremap cxc <ESC>:center<CR>j:left<CR>i
-nnoremap <localleader>s :call Swap()<CR>
 "For making blank lines without leaving normal mode.
 nnoremap <localleader>o o<ESC>
 nnoremap <localleader>O O<ESC>
+nnoremap got :GoldenRatioToggle<CR>
 "On my keyboard, the first letter registers as upper-case if I enter command
 "line mode quickly. Perhaps this is a problem with apple keyboards.
 "These save a lot of red popping up.

@@ -1,3 +1,4 @@
+shell "/usr/local/bin/zsh"
 startup_message off
 vbell off
 
@@ -10,5 +11,4 @@ bind b focus bottom
 
 defscrollback 1000 #size of buffer for copy/scrollback mode
 
-backtick 1 0 1 $HOME/.screenBackticks/.myPwd.sh
-caption always "%{kY} wd:%1` %{kY} | %{cY}Window:(%n,%t) %{kY} | %{mY}SessionName:%S %{kY} |"
+caption always "%{cY}Window:(%n,%t) %{kY} | %{mY}SessionName:%S %{kY} |"
