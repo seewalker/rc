@@ -25,12 +25,13 @@ set laststatus=2 "laststatus is overriden by the statusline plugin.
 set undolevels=1001 "the default is 1000. Can't be too cautious.
 "having a statusline plugin overrides this (vimrc executes before pathogen
 "plugins).
-set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m 
+set statusline=%.25F\ -\ FileType:%y\ -\ Line:%l,%c\ %p\ %a\ %m
 set autochdir "makes the cwd of a buffer the directory of its file (this may
               "have side-effects with plugins
 set novisualbell
 set confirm "rather than spitting errors, ask if i know what i'm doing
 set encoding=utf-8
+set t_Co=256
 set columns=100
 set showcmd "puts normal mode commands so far in the command-line section.
 set backspace=2 "allows backspace to delete newline characters.
@@ -51,7 +52,7 @@ function Swap()
     execute "normal r" . b:nextchar
     execute "normal lr" . b:currentchar . "h"
 endfunction
-     
+
 function ToggleRelativeNumber()
     if &relativenumber
         set norelativenumber
@@ -59,7 +60,7 @@ function ToggleRelativeNumber()
         set relativenumber
     endif
 endfunction
- 
+
 "postcondition: normal mode
 function BsTab()
     let i = 0
@@ -75,7 +76,7 @@ endfunction
 
 "Trims tailing spaces from the end of lines.
 function TrimSpaces()
-    % s/\s\s*$//
+    silent! % s/\s\s*$//
 endfunction
 
 autocmd BufReadPost *
@@ -106,6 +107,7 @@ nnoremap got :GoldenRatioToggle<CR>
 command W w
 command Q q
 command Wq wq
+
 "Plugin commands are long, so here are some abbreviations.
 command St SyntasticToggleMode
 command Gt GundoToggle
@@ -185,6 +187,8 @@ highlight alexTrailingWhitespace ctermbg=Blue
 "and less of an assertion.
 highlight alexOverLength ctermbg=Yellow ctermfg=White
 highlight alexMakeTabGroup ctermbg=Red
+highlight Cursor ctermbg=Yellow
+highlight CursorColumn ctermbg=white
 
 function HaskoreMode()
     inoremap note Note(,) n []<ESC>?(<CR>a
@@ -201,14 +205,17 @@ augroup HighLighting
     endif
     if(&filetype == 'make')
         autocmd InsertLeave * match alexMakeTabGroup /^\t\+/
-    endif   
+    endif
     autocmd InsertLeave * redraw
-augroup END   
+augroup END
+
 augroup FileTypes
     autocmd!
     autocmd BufEnter *.pro set filetype=prolog
     autocmd BufEnter *.b set filetype=brainfuck
     autocmd BufEnter *.b set matchpairs=[:]
+    autocmd BufEnter *.xtm set filetype=scheme
+    autocmd BufEnter *.xtm source ~/.vim/plugin/RainbowParenthsis.vim
     autocmd BufEnter *httpd*.conf set filetype=apache
     autocmd FileType c ab pr printf
     autocmd FileType c,cpp set cindent
