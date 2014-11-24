@@ -13,6 +13,7 @@ syntax enable
 colorscheme xoria256
 set nocompatible
 set smartindent
+set fdo-=search     "do not search within folded text (its annoying how that opens the folds).
 set smartcase
 set expandtab
 execute "set tabstop=" . g:spacing
@@ -115,8 +116,8 @@ command! -nargs=+ Calc :py print <args>
 python from math import *
 "Opens up all files passed to vim as command line arguments in their
 "own tab.
-autocmd VimEnter * argdo tabedit
-autocmd VimEnter * tabclose "This is here because the above command creates
+"autocmd VimEnter * argdo tabedit
+"autocmd VimEnter * tabclose "This is here because the above command creates
 "a tab for an empty file
 "
 " :args    shows list of arguments
@@ -188,7 +189,7 @@ highlight alexTrailingWhitespace ctermbg=Blue
 highlight alexOverLength ctermbg=Yellow ctermfg=White
 highlight alexMakeTabGroup ctermbg=Red
 highlight Cursor ctermbg=Yellow
-highlight CursorColumn ctermbg=white
+highlight CursorColumn ctermbg=0
 
 function HaskoreMode()
     inoremap note Note(,) n []<ESC>?(<CR>a

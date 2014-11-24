@@ -5,6 +5,23 @@
 ;its as if /usr/local/bin isn't being searched.
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH") ))
 (setenv "ESHELL" "/usr/local/bin/zsh")
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+;initial desktop startup
+(setq desktop-path '("~/.emacs.d/"))
+(desktop-save-mode 1)
+(add-to-list 'desktop-globals-to-save 'file-name-history)
+(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+
+;because my x is borken.
+(defadvice yes-or-no-p (around prevent-dialog activate)
+  "Prevent yes-or-no-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+(defadvice y-or-n-p (around prevent-dialog-yorn activate)
+  "Prevent y-or-n-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
 
 (when (> emacs-major-version 22)
         (add-to-list 'load-path "~/.emacs.d/el-get/evil")
@@ -18,13 +35,14 @@
     (set-frame-parameter
       nil 'fullscreen
       (when (not (frame-parameter nil 'fullscreen)) 'fullboth))) 
+
 (global-set-key (kbd "C-S-f") 'toggle-fullscreen)
 
 ;mapc discards the value of the map (so its clearly used for its side effects).
 (mapc
  (lambda (p)
    (add-to-list 'load-path p))
- '("~/.emacs.d/el-get/el-get" "~/mySrc/org-mode/lisp" "~/mySrc/org-mode/contrib/lisp" ".emacs.d/plugin"))
+ '("~/.emacs.d/el-get/el-get" "~/mySrc/org-mode/lisp" "~/mySrc/org-mode/contrib/lisp" "~/.emacs.d/plugin"))
 
 (mapc
  (lambda (pair)
@@ -47,11 +65,22 @@
                                                      nil)))))))))  (add-hook 'lisp-mode-hook 'pretty-greek)
 (add-hook 'emacs-lisp-mode-hook 'pretty-greek)
 
+;gnus stuff
+(setq user-mail-address "seewalker.120@gmail.com")
+(setq user-full-name "Alex Seewald")
+(setq gnus-select-method
+      '(nnimap "gmail"
+	       (nnimap-address "imap.gmail.com")
+	       (nnimap-server-port 993)
+	       (nnimap-authinfo-file "~/.authinfo.gpg")
+	       (nnimap-stream ssl)))
 ;org mode stuff
 (add-hook 'org-mode-hook (lambda () (org-indent-mode t)) t)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (setq org-clock-persist 'history)
 (setq org-startup-align-all-tables t)
+(setq org-log-done 'time)
+(global-set-key "\C-ca" 'org-agenda)
 (setq org-feed-alist
       '( ("Slashdot"
 	  "http://rss.slashdot.org/Slashdot/slashdot"
@@ -64,6 +93,8 @@
  '( (python . t) (R . t) (perl . t) (haskell . t) (latex . t)))
 (info "(Org)Languages")
 
+;cider stuff
+(setq cider-show-error-buffer nil)
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -74,10 +105,7 @@
 (el-get 'sync)
 
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(if window-system
-    (load-theme 'zenburn t)
-  (load-theme 'wombat t))
+(load-theme 'wombat t)
 (require 'rainbow-delimiters)
 ; prog-mode-hook is triggered when a buffer is determined to contain source code.
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
