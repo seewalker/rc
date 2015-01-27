@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/shalom/.vim/bundle'
-let g:netrw_dirhist_2='/Users/shalom/.vim/bundle/vim-fugitive'
-let g:netrw_dirhist_3='/Users/shalom/.vim/bundle/vim-fugitive/plugin'

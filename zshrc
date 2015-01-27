@@ -7,6 +7,8 @@
 ZSH=$HOME/.oh-my-zsh
 ec=$HOME/Documents/EarlhamCollege
 
+source ~/mySrc/zsh-notify/notify.plugin.zsh
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -62,6 +64,7 @@ export PATH=/usr/texbin:~/.cabal/bin:/sbin:/usr/sbin:/usr/local/bin:${PATH}
 export PATH=/usr/local/cuda/bin:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+export MallocLogFile=/Users/shalom/malloc.log
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -85,7 +88,11 @@ function flipPager {
     fi
 }
 
+zmodload zsh/pcre #pcres can go like [[ $x =~ "foo"  ]] in conditionals.
 PS2="|%_> "
+if [[ $TERM =~ "eterm" ]]; then
+    PS1='$'
+fi
 export EDITOR="vim"
 export PAGER=less
 export PERL5LIB=/System/Library/Perl/Extras/5.16/darwin-thread-multi-2level
@@ -93,6 +100,7 @@ export PERL5LIB=/System/Library/Perl/Extras/5.16/darwin-thread-multi-2level
 export LANG="en_Us"
 export KEYTIMEOUT=0.4
 unsetopt autopushd #overriding oh-my-zsh
+setopt SHARE_HISTORY  #I don't care about the complexity of which commands correspond to which sessions when refering to my history
 setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_DUPS
 setopt HIST_VERIFY
@@ -109,11 +117,11 @@ setopt RC_QUOTES #allows single quotes to be nested in strings
 setopt MUltios #implicit 'tee' for multiple `/ ><words>/' expressions.
 setopt VI
 
-zmodload zsh/pcre #pcres can go like [[ $x =~ "foo"  ]] in conditionals.
 bindkey "^[[A" history-beginning-search-backward  #up arrow doesn't simply go up by one. it goes up
                                                     #by one iff text matches.
 bindkey "^[[B" history-beginning-search-forward   #same with down arrow.
-
+source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 de=~/Documents/EarlhamCollege/
 wr=/Library/WebServer/Documents/
 OPENCV_LIBPATH=/usr/local/lib

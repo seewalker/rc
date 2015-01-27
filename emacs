@@ -75,6 +75,11 @@
 	       (nnimap-authinfo-file "~/.authinfo.gpg")
 	       (nnimap-stream ssl)))
 ;org mode stuff
+(setq org-directory "~/Dropbox/org")
+(setq org-mobile-inbox-for-pull "~/Dropbox/org/inbox.org")
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+(setq org-mobile-files '("~/Dropbox/org"))
+
 (add-hook 'org-mode-hook (lambda () (org-indent-mode t)) t)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 (setq org-clock-persist 'history)

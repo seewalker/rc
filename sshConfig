@@ -7,6 +7,9 @@
 
 LogLevel debug
 
+Host *
+    ServerAliveInterval 100
+
 Host cluster.earlham.edu
     User akseewa11
 
@@ -20,6 +23,11 @@ Host proto
 
 Host as0
     HostName as0
+    User akseewa11
+    ProxyCommand ssh -t -Y akseewa11@cluster.earlham.edu nc %h %p
+
+Host dali
+    HostName dali
     User akseewa11
     ProxyCommand ssh -t -Y akseewa11@cluster.earlham.edu nc %h %p
 
