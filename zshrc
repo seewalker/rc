@@ -65,6 +65,11 @@ export PATH=/usr/local/cuda/bin:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 export MallocLogFile=/Users/shalom/malloc.log
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/shalom/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+$(boot2docker shellinit)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -117,9 +122,12 @@ setopt RC_QUOTES #allows single quotes to be nested in strings
 setopt MUltios #implicit 'tee' for multiple `/ ><words>/' expressions.
 setopt VI
 
-bindkey "^[[A" history-beginning-search-backward  #up arrow doesn't simply go up by one. it goes up
-                                                    #by one iff text matches.
-bindkey "^[[B" history-beginning-search-forward   #same with down arrow.
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 source /usr/local/bin/virtualenvwrapper.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 de=~/Documents/EarlhamCollege/
