@@ -218,6 +218,7 @@ augroup FileTypes
     autocmd BufEnter *.xtm set filetype=scheme
     autocmd BufEnter *.xtm source ~/.vim/plugin/RainbowParenthsis.vim
     autocmd BufEnter *httpd*.conf set filetype=apache
+    autocmd FileType tex inoremap \tb \textbf{}
     autocmd FileType c ab pr printf
     autocmd FileType c,cpp set cindent
     autocmd FileType c,cpp  ab inc include
