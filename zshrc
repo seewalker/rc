@@ -13,12 +13,13 @@ source ~/mySrc/zsh-notify/notify.plugin.zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="kolo"
+ZSH_THEME="pure"
 
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias findg="find . -type f -exec grep"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -27,7 +28,7 @@ source ~/mySrc/zsh-notify/notify.plugin.zsh
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=30
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
@@ -54,22 +55,21 @@ source ~/mySrc/zsh-notify/notify.plugin.zsh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx web-search vi-mode battery)
+plugins=(git osx web-search vi-mode battery zsh-syntax-highlighting brew)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=/usr/texbin:~/.cabal/bin:/sbin:/usr/sbin:/usr/local/bin:${PATH}
+export PATH=~/anaconda/bin:/usr/texbin:~/.cabal/bin:/sbin:/usr/sbin:/usr/local/bin:${PATH}
 export PATH=/usr/local/cuda/bin:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 export MallocLogFile=/Users/shalom/malloc.log
 
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/shalom/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
-$(boot2docker shellinit)
+#$(boot2docker shellinit)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -89,7 +89,7 @@ function flipPager {
     if [[ $PAGER -eq $VIMPAGER ]]; then 
         PAGER=less
     else 
-        PAGER=VIMPAGER
+        PAGER=vimpager
     fi
 }
 
@@ -99,7 +99,7 @@ if [[ $TERM =~ "eterm" ]]; then
     PS1='$'
 fi
 export EDITOR="vim"
-export PAGER=less
+export PAGER=vimpager
 export PERL5LIB=/System/Library/Perl/Extras/5.16/darwin-thread-multi-2level
 #export VIMPAGER="/bin/sh -c "unset PAGER; col -b -x |    vim -R -c 'set ft=man nomod nolist' -c 'map q : q<CR>'    -c 'map <SPACE> <C-D>' -c 'map b <C-U>'    -c 'nmap K :Man <C-R>=expand(\"<cword>\")<CR><CR>' -""
 export LANG="en_Us"
@@ -128,8 +128,6 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-source /usr/local/bin/virtualenvwrapper.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 de=~/Documents/EarlhamCollege/
 wr=/Library/WebServer/Documents/
 OPENCV_LIBPATH=/usr/local/lib
