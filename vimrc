@@ -214,6 +214,7 @@ augroup FileTypes
     autocmd!
     autocmd BufEnter *.pro set filetype=prolog
     autocmd BufEnter *.b set filetype=brainfuck
+    autocmd BufEnter *.md set filetype=markdown
     autocmd BufEnter *.b set matchpairs=[:]
     autocmd BufEnter *.xtm set filetype=scheme
     autocmd BufEnter *.xtm source ~/.vim/plugin/RainbowParenthsis.vim

@@ -64,6 +64,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/anaconda/bin:/usr/texbin:~/.cabal/bin:/sbin:/usr/sbin:/usr/local/bin:${PATH}
 export PATH=/usr/local/cuda/bin:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+# This following line is necessary in order for the psycopg2 module to work.
+export DYLD_FALLBACK_LIBRARY_PATH=/Users/shalom/anaconda/lib
 export MallocLogFile=/Users/shalom/malloc.log
 
 export DOCKER_HOST=tcp://192.168.59.103:2376
